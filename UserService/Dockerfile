@@ -26,5 +26,13 @@ RUN cd /opt/app; \
 
 RUN cd /opt/app/SeaUsers-master; make
 
+RUN wget https://releases.hashicorp.com/consul/0.6.4/consul_0.6.4_linux_amd64.zip
+RUN unzip consul_0.6.4_linux_amd64.zip \
+    && cp consul /usr/bin
 
-CMD ["/opt/app/SeaUsers-master/_rel/seausers_release/bin", "foreground"]
+ADD ./start.sh /start.sh
+RUN chmod 755 /start.sh
+    
+EXPOSE 8080
+
+CMD ["/bin/bash", "/start.sh"]
