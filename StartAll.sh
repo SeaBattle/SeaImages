@@ -17,3 +17,10 @@ docker run -d \
     --volume=/var/run/docker.sock:/tmp/docker.sock \
     gliderlabs/registrator:latest \
       consul://localhost:8500
+
+# postgres
+docker run -d -p 5432:5432 --name postgres -e POSTGRES_PASSWORD=sea_wind_arrr! -v /home/tihon/postgres:/var/lib/postgresql/data postgres
+
+# user service
+docker build . -t seabattle/user_service
+docker run -d -p 8080:8081 --name game_service seabattle/user_service
